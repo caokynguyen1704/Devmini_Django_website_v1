@@ -1,0 +1,43 @@
+ 
+{% extends "pages/base.html" %}
+
+{% block title %}
+Trang Cá Nhân
+{% endblock %}
+
+{% block content %}
+
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <td>Họ và Tên:</td>
+      <td>{{user.firstname}} {{user.lastname}}</td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td>{{user.email}}</td>
+    </tr>
+    <tr>
+      <td>Tên Truy Cập:</td>
+      <td>{{user.username}}</td>
+    </tr>
+    <tr>
+      <td>UID:</td>
+      <td>{{user.Uid}}</td>
+    </tr>
+    <tr>
+      <td>Lĩnh Vực Chuyên Môn:</td>
+      <td>{{user.Linhvuc}}</td>
+    </tr>
+    <tr>
+      <td>Chức Vụ:</td>
+      <td>{{user.Chucvu}}</td>
+    </tr>
+    <tr>
+      <td><b>Điểm Rank:</b></td>
+      <td><b>{{user.Point}}</b></td>
+    </tr>
+  </tbody>
+</table>
+<a href="#" class="btn btn-outline-danger" role="button" aria-pressed="true">Sửa Thông Tin</a>
+{% endblock %}

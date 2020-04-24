@@ -1,0 +1,101 @@
+{% extends "pages/base.html" %}
+
+{% block title %}
+Trang Chủ
+{% endblock %}
+
+{% block content %}
+
+{% load static %}
+{% if user.username %}
+<div class="container">
+  
+  <div class="row">
+    <div class="col-6">
+      <center>
+        <a href="#" class="btn btn-info btn-lg active" role="button" aria-pressed="true">
+          <img src="{% static "icons/trophy.svg" %}" width="100px" height="100px" class="d-inline-block align-top" alt="">
+          <br>
+          Xếp Hạng
+        </a>
+      </center>
+    </div>
+    <div class="col-6">
+      <center>
+        <a href="#" class="btn btn-info btn-lg active" role="button" aria-pressed="true">
+          <img src="{% static "icons/pencil.svg" %}" width="100px" height="100px" class="d-inline-block align-top" alt="">
+          <br>
+          Bài Viết
+        </a>
+      </center>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-6">
+      <center>
+        <a href="#" class="btn btn-info btn-lg active" role="button" aria-pressed="true">
+        <img src="{% static "icons/controller.svg" %}" width="100px" height="100px" class="d-inline-block align-top" alt="">
+          <br>
+          MiniGame
+        </a>
+      </center>
+    </div>
+    <div class="col-6">
+      <center>
+        <a href="#" class="btn btn-info btn-lg active" role="button" aria-pressed="true">
+          <img src="{% static "icons/code-slash.svg" %}" width="100px" height="100px" class="d-inline-block align-top" alt="">
+          <br>
+          Code
+        </a>
+      </center>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-6">
+      <center>
+        <a href="#" class="btn btn-info btn-lg active" role="button" aria-pressed="true">
+        <img src="{% static "icons/three-dots.svg" %}" width="100px" height="100px" class="d-inline-block align-top" alt="">
+          <br>
+          More
+        </a>
+      </center>
+    </div>
+    {% if user.is_superuser %}
+    <div class="col-6">
+      <center>
+        <a href="#" class="btn btn-info btn-lg active" role="button" aria-pressed="true">
+          <img src="{% static "icons/star.svg" %}" width="100px" height="100px" class="d-inline-block align-top" alt="">
+          <br>
+          Admin
+        </a>
+      </center>
+    </div>
+    {% endif %}
+  </div>
+  
+  <!--menu-->
+  </div>
+   {% else %}
+   <form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    {% for key, value in form.errors.items %}
+            {{value}}
+        {% endfor %}
+
+    <div class="form-group">
+        <label for="InputName">Tên Đăng Nhập:</label>
+        <input type="text" name="username" class="form-control" id="Name" required>
+    </div>
+    <div class="form-group">
+        <label for="InputPassword1">Password:</label>
+        <input type="password" name="password" class="form-control" id="Password1" required>
+    </div>
+        <input type="hidden" name="next" value="/"/>
+        <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+        <p>Chưa có tài khoản ? <a href="{% url 'register'%}">Đăng Ký</a></p>
+    </form>
+   {% endif %}
+</div>
+{% endblock %}

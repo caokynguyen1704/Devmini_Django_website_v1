@@ -1,0 +1,26 @@
+ 
+{% extends "pages/base.html" %}
+
+{% block title %}
+Đăng Nhập
+{% endblock %}
+
+{% block content %}
+    <form method="POST">
+    {% csrf_token %}
+    {% for key, value in form.errors.items %}
+            {{value}}
+        {% endfor %}
+    <div class="form-group">
+        <label for="InputName">Tên Đăng Nhập:</label>
+        <input type="text" name="username" class="form-control" id="Name" required>
+    </div>
+    <div class="form-group">
+        <label for="InputPassword1">Password:</label>
+        <input type="password" name="password" class="form-control" id="Password1" required>
+    </div>
+        <input type="hidden" name="next" value="/"/>
+        <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+    </form>
+
+{% endblock %}
