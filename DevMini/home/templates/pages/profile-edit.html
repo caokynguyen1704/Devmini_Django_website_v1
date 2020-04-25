@@ -1,0 +1,15 @@
+{% extends "pages/base.html" %}
+
+{% block title %}
+Sửa thông tin
+{% endblock %}
+
+{% block content %}
+<form action="." method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Đăng ký"/>
+        </form>
+            
+            
+{% endblock %}
