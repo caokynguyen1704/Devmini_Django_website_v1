@@ -1,0 +1,34 @@
+{% extends "pages/base.html" %}
+ 
+{% block title %}{{rank.username}}{% endblock %}
+ 
+{% block content %}
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <td>Họ và Tên:</td>
+      <td>{{rank.first_name}} {{rank.last_name}}</td>
+    </tr>
+      <td>UID:</td>
+      <td>{{rank.Uid}}</td>
+    </tr>
+    <tr>
+      <td>Lĩnh Vực Chuyên Môn:</td>
+      <td>{{rank.Linhvuc}}</td>
+    </tr>
+    <tr>
+      <td>Chức Vụ:</td>
+      <td>{{rank.Chucvu}}</td>
+    </tr>
+    <tr>
+      <td>Năm Sinh:</td>
+      <td>{{rank.Namsinh}}</td>
+    </tr>
+    <tr>
+      <td><b>Điểm Rank:</b></td>
+      <td><b>{{rank.Point}}</b></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}

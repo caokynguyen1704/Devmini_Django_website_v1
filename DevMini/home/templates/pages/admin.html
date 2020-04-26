@@ -1,0 +1,37 @@
+{% extends "pages/base.html" %}
+ 
+{% block title %}Admin{% endblock %}
+ 
+{% block content %}
+<form action="." method="POST">
+            {% csrf_token %}
+    <input type="text" class="form-control" name="title" placeholder="ID Người cần sửa thông tin" required>
+    <div class="class="form-group"">
+        <label>Chức Vụ:</label>
+        <select class="custom-select mr-sm-2" name="chucvu">
+            <option selected>Trống
+            <option value="PhD">Tiến Sĩ
+            <option value="BA">Cử Nhân Xã Hội
+            <option value="BSc">Cử Nhân Tự Nhiên
+            <option value="MA">Thạc Sĩ Xã Hội
+            <option value="MS">Thạc Sĩ Tự Nhiên
+            <option value="Master">Chuyên Gia
+        </select>
+    </div>
+    <div class="class="form-group"">
+        <label>Lĩnh Vực:</label>
+        <select class="custom-select mr-sm-2" name="linhvuc">
+            <option selected>Trống
+            <option value="Xây Dựng">Xây Dựng
+            <option value="Mod">Mod
+            <option value="Trigger">Trigger
+            <option value="Script">Script
+            <option value="Plugin">Plugin
+            <option value="Công Nhân">Công Nhân
+        </select>
+    </div>
+    <br>
+            <input type="submit" value="Thay Đổi"/>
+        </form>
+
+{% endblock %}

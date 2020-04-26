@@ -19,7 +19,28 @@ class EditCode(forms.Form):
         codea.Title=self.cleaned_data['title']
         codea.User=nick
         codea.save()
+class LikeUnlike(forms.Form):
+    likeunlike=forms.IntegerField()
+    def tangLike(self,id,nick):
+        post = code.objects.get(id=id)
+        if self.cleaned_data['likeunlike']==1:
+            post.Like=post.Like + 1 
+            post.save()
+        elif self.cleaned_data['likeunlike']==2:
+            post.Unlike=post.Unlike + 1
+            post.save()
+        elif self.cleaned_data['likeunlike']==3 and post.User==nick:
+            post.delete()
 
+class AdminSite(forms.Form):
+    id=forms.IntegerField()
+    chucvu=forms.CharField(max_length=200)
+    linhvuc=forms.CharField(max_length=200)
+    def edit_infor(self):
+        username=MyUser.objects.get(id=self.cleaned_data['id'])
+        username.Chucvu=self.cleaned_data['chucvu']
+        username.Linhvuc=self.cleaned_data['linhvuc']
+        username.save()
 class EditProfile(forms.Form):
     firstname=forms.CharField(label="Họ",max_length=100)
     lastname=forms.CharField(label="Tên",max_length=100)

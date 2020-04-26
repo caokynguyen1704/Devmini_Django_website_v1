@@ -1,0 +1,27 @@
+{% extends "pages/base.html" %}
+ 
+{% block title %}Xếp Hạng{% endblock %}
+ 
+{% block content %}
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Tên</th>
+      <th scope="col">Điểm Số</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for rank in Rank %}
+    <tr>
+      <td>
+            <span class="d-inline-block text-truncate" style="max-width: 100px;">
+                <a href="/infor/{{rank.id}}">{{rank.username}}</a>
+            </span>
+      </td>
+      <td><span class="d-inline-block text-truncate" style="max-width: 100px;">{{rank.Point}}
+            </span></td>
+    </tr>
+    {% endfor %} 
+  </tbody>
+</table>
+{% endblock %}
