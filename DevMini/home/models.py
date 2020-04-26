@@ -11,3 +11,10 @@ class MyUser(AbstractUser):
     Noio=models.CharField(max_length=500,default="")
     Uid=models.IntegerField(default=0)
 
+class code(models.Model):
+    Title=models.CharField(max_length=200,default="")
+    Code=models.TextField()
+    Date=models.DateTimeField(auto_now=True)
+    User=models.CharField(max_length=200,default="")
+    Like=models.IntegerField(default=0)
+    Unlike=models.IntegerField(default=0)

@@ -1,17 +1,28 @@
 from django import forms
 import re
 from django.contrib.auth.models import User
-from home.models import MyUser
+from home.models import MyUser,code
+class EditCode(forms.Form):
+    codeedit=forms.CharField(max_length=999999999999999999999999999999)
+    def savecode(self,nick):
+        codea=code()
+        codea.Code=self.cleaned_data['codeedit']
+        codea.User=nick
+        codea.save()
+
 class EditProfile(forms.Form):
     firstname=forms.CharField(label="Họ",max_length=100)
     lastname=forms.CharField(label="Tên",max_length=100)
     namsinh=forms.IntegerField(label="Năm sinh")
+    uid=forms.IntegerField(label="uid")
     noio=forms.CharField(label="Nơi ở",max_length=200)
     def edit_OK(self,nick):
         username=MyUser.objects.get(username=nick)
         username.first_name=self.cleaned_data['firstname']
         username.Noio=self.cleaned_data['noio']
+        username.last_name=self.cleaned_data['lastname']
         username.Namsinh=self.cleaned_data['namsinh']
+        username.Uid=self.cleaned_data['uid']
         username.save()
 
 class RegistrationForm(forms.Form):

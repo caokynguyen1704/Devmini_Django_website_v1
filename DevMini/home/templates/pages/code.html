@@ -1,13 +1,22 @@
-{% extends "pages/base.html" %}
-{% load static %}
-{% block title %}
-Trình Soạn Thảo Script MiniWorld
-{% endblock %}
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
 
-{% block content %}
-<div id="app">
+<head>
+	<meta charset="UTF-8">
+    {% load static %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Trình Soạn Thảo Script MiniWorld</title>
+	<link href="{% static 'css/app.css'%}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+
+<body>
+<div class="container-fluid">
+  <div id="app">
     <div id="codeEditor" class="code-editor"></div>
-</div>
-<script src="{% static 'js/datapack.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-{% endblock %}
+  </div>
+ </div>
+  <script src="{% static 'js/datapack.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script></body>
+
+</html>
