@@ -3,10 +3,20 @@ import re
 from django.contrib.auth.models import User
 from home.models import MyUser,code
 class EditCode(forms.Form):
-    codeedit=forms.CharField(max_length=999999999999999999999999999999)
-    def savecode(self,nick):
+    codeedit=forms.CharField(widget=forms.Textarea)
+    title=forms.CharField(max_length=200)
+    img=forms.ImageField()
+    def savecode_hasImg(self,nick):
         codea=code()
         codea.Code=self.cleaned_data['codeedit']
+        codea.Title=self.cleaned_data['title']
+        codea.Img=self.cleaned_data['img']
+        codea.User=nick
+        codea.save()
+    def savecode_noImg(self,nick):
+        codea=code()
+        codea.Code=self.cleaned_data['codeedit']
+        codea.Title=self.cleaned_data['title']
         codea.User=nick
         codea.save()
 

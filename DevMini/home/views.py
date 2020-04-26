@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
+from django.db import models
 def index(request):
    return render(request, 'pages/home.html')
 
@@ -33,13 +34,24 @@ def codex(request):
    form = EditCode()
    nick=request.user.username
    if request.method == 'POST':
-      form=EditCode(request.POST)
+      form=EditCode(request.POST,request.FILES)
       if form.is_valid():
-         form.savecode(nick)
-         return HttpResponseRedirect('/')
+         upload(request.FILES['img'])
+         form.savecode_hasImg(nick)
+      else:
+         form.savecode_noImg(nick)
+      return HttpResponseRedirect('/')
    return render(request, 'pages/code.html', {'form': form})
 
-from .models import code
+from home.models import code
 def list(request):
    Data = {'Code': code.objects.all().order_by('-Date')}
    return render(request, 'pages/baidang.html', Data)
+def upload(f): 
+    file = open(f.name, 'wb+') 
+    for chunk in f.chunks():
+        file.write(chunk)
+
+def post(request, id):
+    post = code.objects.get(id=id)
+    return render(request, 'pages/post.html', {'post': post})

@@ -5,7 +5,29 @@ Bài Viết
 {% endblock %}
 
 {% block content %}
+
+   <!--{{post.Date|date:"d-m-Y"}}-->
+   <table class="table">
+  <thead>
+    <tr>
+      <th style="width:60%" scope="col">Tiêu Đề</th>
+    <th>
+      <th scope="col">Người Đăng</th>
+      <th scope="col">Like/Unlike</th>
+    </th>
+    </tr>
+  </thead>
+  <tbody>
 {% for post in Code %}
-   <h4>{{post.Date|date:"d-m-Y"}}
-{% endfor %}
+    <tr>
+      <td><a href="/post/{{post.id}}">{{post.Title}}</a></td>
+    <td>
+      <td>{{post.User}}</td>
+      <td>{{post.Like}}/{{post.Unlike}}</td>
+    </td>
+   </tr>
+ {% endfor %}  
+  </tbody>
+</table>
+
 {% endblock %}

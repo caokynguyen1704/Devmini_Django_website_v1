@@ -18,3 +18,4 @@ class code(models.Model):
     User=models.CharField(max_length=200,default="")
     Like=models.IntegerField(default=0)
     Unlike=models.IntegerField(default=0)
+    Img=models.ImageField(null=True)
