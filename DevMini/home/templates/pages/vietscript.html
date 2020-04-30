@@ -1,0 +1,23 @@
+{% extends "pages/base.html" %}
+{% load static %}
+{% block title %}
+MiniCode
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+<form action="." method="POST"> 
+    {% csrf_token %}
+
+	<input type="text" class="form-control" name="title" placeholder="Tiêu Đề" required>
+	<center><textarea rows="5" class="form-control" name="noidung1" style="width:99%;height:100%" placeholder="Nội Dung" ></textarea></center>
+    <center><textarea rows="2" class="form-control" name="code1" style="width:99%;height:100%" placeholder="Code"></textarea></center>
+    <center><textarea rows="5" class="form-control" name="noidung2" style="width:99%;height:100%" placeholder="Nội Dung"></textarea></center>
+    <center><textarea rows="2" class="form-control" name="code2" style="width:99%;height:100%" placeholder="Code"></textarea></center>
+    <center><textarea rows="5" class="form-control" name="noidung3" style="width:99%;height:100%" placeholder="Nội Dung"></textarea></center>
+    <center><textarea rows="2" class="form-control" name="code3" style="width:99%;height:100%" placeholder="Code"></textarea></center>
+    
+    
+	<button type="submit" class="btn btn-primary">Đăng</button>
+</form>
+{% endblock %}

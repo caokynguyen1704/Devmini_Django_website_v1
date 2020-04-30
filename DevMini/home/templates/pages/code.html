@@ -9,10 +9,22 @@ MiniCode
 <div class="container-fluid">
 <form action="." method="POST" enctype="multipart/form-data"> 
     {% csrf_token %}
+	     <div class="class="form-group"">
+        <label>Phân Loại:</label>
+        <select class="custom-select mr-sm-2" name="loai">
+            <option selected>Vui lòng chọn
+            <option value="Mod">Mod
+            <option value="Script">Script
+            <option value="Map">Map
+            <option value="Build">Build
+            <option value="Thắc Mắc">Thắc Mắc
+            <option value="Góp Ý">Góp Ý
+        </select>
+    </div>
 	<input type="text" class="form-control" name="title" placeholder="Tiêu Đề" required>
 	<center><textarea rows="11" class="form-control" name="codeedit" style="width:99%;height:100%" placeholder="Nội Dung" required></textarea></center>
 	<div class="form-group">
-		<label for="id_img">Ảnh đính kèm:</label> <input type="file" value="123" name="img" accept="image/*" id="id_img">
+		<label for="id_img">Ảnh đính kèm:</label> <input type="file" name="img" accept="image/*" id="id_img">
 	</div>
 
 	<button type="submit" class="btn btn-primary">Đăng</button>

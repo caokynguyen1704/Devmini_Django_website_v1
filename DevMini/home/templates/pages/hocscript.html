@@ -1,35 +1,34 @@
 {% extends "pages/base.html" %}
 {% load static %}
 {% block title %}
-Bài Viết
+Bài Học
 {% endblock %}
 
 {% block content %}
-<a href="{% url 'vietbai' %}" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Tạo bài viết mới</a>
+<a href="{% url 'vietbaihoc' %}" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Tạo bài học mới</a>
    <!--{{post.Date|date:"d-m-Y"}}-->
    <table class="table">
   <thead>
     <tr>
-      <th>Phân Loại</th>
+      <th>Tiêu Đề</th>
       <th>Người Đăng</th>
-      <th>Hưởng Ứng</th>
+      <th>Ngày Đăng</th>
     </tr>
   </thead>
   <tbody>
-{% for post in Code %}
+{% for post in script %}
     <tr>
       <td>
-        <b>[{{post.Loai}}]</b>
-        <a href="/post/{{post.id}}">
+        <a href="/hocscript/{{post.id}}">
           <p class="text-break">
             <span class="d-inline-block text-truncate" style="max-width: 100px;">
-                {{post.Title}}
+                {{post.Tieude}}
             </span>
           </p>
         </a>
       </td>
       <td>{{post.User}}</td>
-      <td>{{post.HuongUng}} % </td>
+      <td>{{post.Date|date:"d-m-Y"}}</td>
    </tr>
  {% endfor %}  
   </tbody>

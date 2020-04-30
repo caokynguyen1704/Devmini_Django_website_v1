@@ -3,11 +3,11 @@
 {% block title %}{{post.Title}}{% endblock %}
  
 {% block content %}
-<h6> {{post.Date}}</h6>
+<p><h6> {{post.Date}}</h6><a href="{% url 'baidang'%}" class="btn btn-primary" role="button" aria-pressed="true">Trở về</a></p>
 <div class="container">
     <center><h4>{{post.Title}}</h4></center>
     <p style="text-align: right;width:100%"><i>{{post.User}}</i></p>
-</div>
+
 
 
 
@@ -18,7 +18,35 @@
     {% endif %}
 </div>
 <hr>
-<form action="." method="POST">
+<p><center> [Lượt thích: {{post.Like}}]&emsp;&emsp;&emsp;[Lượt không thích: {{post.Unlike}}]</center></p>
+<hr>
+
+
+<div style="
+            width:100%;
+            height:200px;
+            overflow-x:hidden;
+            overflow-y:auto;">
+{% for comment in post.comments.all %}
+    <div>
+    <b><a href="/infor/{{comment.id_user}}">{{comment.author}}</a></b> lúc {{comment.date|date:"d-m-Y"}}
+    <p>{{comment.body}}</p>
+    </div>
+{% endfor %}
+</div>
+<hr>
+{% if user.username %}
+    <form action="{% url 'post' post.id %}" method="POST">
+        {% csrf_token %}
+        <P>Bình luận:</p>
+        <textarea name="body" style="width:100%;
+            height:100px;" required="" id="id_body"></textarea>
+        <br/>
+        <input type="submit" value="Bình luận"/>
+    </form>
+{% endif %}
+<hr>
+ <form action="/like/{{post.id}}" method="POST">
     {% csrf_token %}
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="likeunlike" value="1">
@@ -26,13 +54,21 @@
         </div>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="likeunlike" value="2">
-            <label class="form-check-label">UnLike</label>
+            <label class="form-check-label">DisLike</label>
         </div>
+        {% if user.username == post.User %}
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="likeunlike" value="3">
             <label class="form-check-label">Xóa bài</label>
         </div>
-
+        {% endif %}
+        {% if user.is_superuser %}
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="likeunlike" value="3">
+            <label class="form-check-label">Xóa bài</label>
+        </div>
+        {% endif %}
         <button type="submit" class="btn btn-outline-primary">Xác Nhận</button>
 </form>
+</div>
 {% endblock %}

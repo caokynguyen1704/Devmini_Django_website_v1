@@ -7,9 +7,17 @@ Trang Chủ
 {% block content %}
 
 {% load static %}
-
+{% if user.username %}
 <div class="container">
+  <div class="alert alert-danger" role="alert">
+  <b>Thông báo: Xóa acc sau 2 ngày nếu không thêm UID và Họ Tên</b> <br>
+  {% for ad in ad %}
+  {{ad.Thongbao}}<br>
+  {% endfor %}
+  </b>
   
+
+</div>
   <div class="row">
     <div class="col-6">
       <center>
@@ -55,10 +63,10 @@ Trang Chủ
   <div class="row">
     <div class="col-6">
       <center>
-        <a href="#" class="btn btn-info btn-lg active" role="button" aria-pressed="true">
-        <img src="{% static "icons/three-dots.svg" %}" width="100px" height="100px" class="d-inline-block align-top" alt="">
+        <a href="{% url 'baihoc'%}" class="btn btn-info btn-lg active" role="button" aria-pressed="true">
+        <img src="{% static "icons/window.svg" %}" width="100px" height="100px" class="d-inline-block align-top" alt="">
           <br>
-          More
+          Học Script
         </a>
       </center>
     </div>
@@ -78,4 +86,24 @@ Trang Chủ
   <!--menu-->
   </div>
 </div>
+  {% else %}
+      <form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    {% for key, value in form.errors.items %}
+            {{value}}
+        {% endfor %}
+
+    <div class="form-group">
+        <label for="InputName">Tên Đăng Nhập:</label>
+        <input type="text" name="username" class="form-control" id="Name" required>
+    </div>
+    <div class="form-group">
+        <label for="InputPassword1">Password:</label>
+        <input type="password" name="password" class="form-control" id="Password1" required>
+    </div>
+        <input type="hidden" name="next" value="/"/>
+        <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+        <p>Chưa có tài khoản ? <a href="{% url 'register'%}">Đăng Ký</a></p>
+    </form>
+   {% endif %}
 {% endblock %}

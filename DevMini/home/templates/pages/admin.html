@@ -3,9 +3,10 @@
 {% block title %}Admin{% endblock %}
  
 {% block content %}
+{% if user.is_superuser %}
 <form action="." method="POST">
             {% csrf_token %}
-    <input type="text" class="form-control" name="title" placeholder="ID Người cần sửa thông tin" required>
+    <input type="text" class="form-control" name="id" placeholder="ID Người cần sửa thông tin" required>
     <div class="class="form-group"">
         <label>Chức Vụ:</label>
         <select class="custom-select mr-sm-2" name="chucvu">
@@ -33,5 +34,6 @@
     <br>
             <input type="submit" value="Thay Đổi"/>
         </form>
-
+ {% endif %}
+ 
 {% endblock %}
