@@ -2,7 +2,7 @@
 {% extends "pages/base.html" %}
 {% load static %}
 {% block title %}
-MiniCode
+Viết Bài
 {% endblock %}
 
 {% block content %}
@@ -19,6 +19,9 @@ MiniCode
             <option value="Build">Build
             <option value="Thắc Mắc">Thắc Mắc
             <option value="Góp Ý">Góp Ý
+            {% if user.is_superuser %}
+            <option value="THÔNG BÁO">THÔNG BÁO
+            {% endif %}
         </select>
     </div>
 	<input type="text" class="form-control" name="title" placeholder="Tiêu Đề" required>

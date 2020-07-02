@@ -1,0 +1,54 @@
+{% extends "pages/base.html" %}
+ 
+{% block title %}HỌC VIÊN{% endblock %}
+ 
+{% block content %}
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Tên</th>
+      <th scope="col">Năm Sinh</th>
+      <th scope="col">Điểm Chuyên Cần</th>
+      <th scope="col">Điểm Ngày</th>
+      <th scope="col">Điểm Tuần</th>
+      <th scope="col">Điểm Tháng</th>
+      <th scope="col">Điểm Cuối Kỳ</th>
+      <th scope="col">Tổng Điểm</th>
+      <th scope="col">Chú Thích</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for hv in hv %}
+    <tr>
+      <td>
+        {{hv.hovaten}}
+      </td>
+      <td>
+        {{hv.namsinh}}
+      </td>
+      <td>
+        {{hv.chuyencan}}
+      </td>
+      <td>
+        {{hv.diem_baihoc}}
+      </td>
+      <td>
+        {{hv.diem_kiemtratuan}}
+      </td>
+      <td>
+        {{hv.diem_kiemtrathang}}
+      </td>
+      <td>
+        {{hv.diem_ketthuc}}
+      </td>
+      <td>
+        {{hv.tongdiem}}
+      </td>
+      <td>
+         {{hv.chuthich}}
+      </td>
+    </tr>
+    {% endfor %} 
+  </tbody>
+</table>
+{% endblock %}

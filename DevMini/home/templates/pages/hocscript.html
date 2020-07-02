@@ -1,37 +1,26 @@
 {% extends "pages/base.html" %}
-{% load static %}
-{% block title %}
-Bài Học
-{% endblock %}
-
+ {% load static %}
+{% block title %}Học Script{% endblock %}
+ 
 {% block content %}
-<a href="{% url 'vietbaihoc' %}" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Tạo bài học mới</a>
-   <!--{{post.Date|date:"d-m-Y"}}-->
-   <table class="table">
-  <thead>
-    <tr>
-      <th>Tiêu Đề</th>
-      <th>Người Đăng</th>
-      <th>Ngày Đăng</th>
-    </tr>
-  </thead>
-  <tbody>
-{% for post in script %}
-    <tr>
-      <td>
-        <a href="/hocscript/{{post.id}}">
-          <p class="text-break">
-            <span class="d-inline-block text-truncate" style="max-width: 100px;">
-                {{post.Tieude}}
-            </span>
-          </p>
+    <div class="row">
+    <div class="col-6">
+      <center>
+        <a href="https://www.youtube.com/channel/UC2n4zr1HoLg7917pQO--0nw" class="btn btn-info btn-lg active" role="button" aria-pressed="true">
+        <img src="{% static "icons/book.svg" %}" width="100px" height="100px" class="d-inline-block align-top" alt="">
+          <br>
+          Học Script Youtube
         </a>
-      </td>
-      <td>{{post.User}}</td>
-      <td>{{post.Date|date:"d-m-Y"}}</td>
-   </tr>
- {% endfor %}  
-  </tbody>
-</table>
-
+    
+      </center>
+    </div>
+    <div class="col-6">
+      <center>
+        <a href="#" class="btn btn-info btn-lg active" role="button" aria-pressed="true">
+          <img src="{% static "icons/chat.svg" %}" width="100px" height="100px" class="d-inline-block align-top" alt="">
+          <br>
+          Góc Hỏi Bài
+        </a>
+      </center>
+    </div>
 {% endblock %}

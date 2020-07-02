@@ -1,21 +1,39 @@
-
-
- 
-
- 
 {% extends "pages/base.html" %}
-
+{% load static %}
 {% block title %}
-Code Zone
+Chia Sẻ Script 
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-{% load static %}
-  <div id="app">
-    <div id="codeEditor" class="code-editor"></div>
-  </div>
- </div>
- <script src="{% static 'js/datapack.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+{% if user.is_superuser %}
+<a href="{% url 'share' %}" class="btn btn-outline-success btn-lg btn-block" role="button" aria-pressed="true">Share Script mới</a>
+ {% endif %}  
+   <!--{{post.Date|date:"d-m-Y"}}-->
+   <table class="table">
+  <thead>
+    <tr>
+      <th>Tiêu Đề</th>
+      <th>Người Đăng</th>
+      <th>Giới Thiệu</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for post in Codex %}
+    <tr>
+      <td>
+        <a href="/code/{{post.id}}">
+          <p class="text-break">
+            <span class="d-inline-block text-truncate" style="max-width: 100px;">
+                {{post.Title}}
+            </span>
+          </p>
+        </a>
+      </td>
+      <td>{{post.User}}</td>
+      <td>{{post.Gioithieu}}</td>
+   </tr>
+ {% endfor %}  
+  </tbody>
+</table>
+
 {% endblock %}

@@ -1,10 +1,23 @@
 from django import forms
 import re
-#from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 User = get_user_model()
-from home.models import MyUser,code, script
+from home.models import MyUser,code,sharecode
+from .models import Comment, Comment_share
+class ShareScript(forms.Form):
+    title=forms.CharField(max_length=200)
+    gioi_thieu=forms.CharField(max_length=500)
+    link=forms.CharField(max_length=300)
+    chucnang=forms.CharField(max_length=500)
+    def save(self,nick):
+        script=sharecode()
+        script.Title=self.cleaned_data['title']
+        script.Gioithieu=self.cleaned_data['gioi_thieu']
+        script.Link=self.cleaned_data['link']
+        script.Chucnang=self.cleaned_data['chucnang']
+        script.User=nick
+        script.save()
 class EditCode(forms.Form):
     loai=forms.CharField(max_length=1000)
     codeedit=forms.CharField(widget=forms.Textarea)
@@ -26,8 +39,8 @@ class EditCode(forms.Form):
         codea.User=nick
         codea.save()
 class LikeUnlike(forms.Form):
-    likeunlike=forms.IntegerField()
-    def tangLike(self,id,nick):
+    likeunlike = forms.IntegerField()
+    def tangLike( self , id ,nick):
         post = code.objects.get(id=id)
         username=MyUser.objects.get(username=nick)
         if self.cleaned_data['likeunlike']==1:
@@ -92,10 +105,6 @@ class RegistrationForm(forms.Form):
     def save(self):
         MyUser.objects.create_user(username=self.cleaned_data['username'], email=self.cleaned_data['email'], password=self.cleaned_data['password1'])
 
-
-from django import forms
-from .models import Comment
-
 class CommentForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
@@ -114,24 +123,22 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ["body"]
 
-class EditScript(forms.Form):
-    code1=forms.CharField(widget=forms.Textarea)
-    code2=forms.CharField(widget=forms.Textarea)
-    code3=forms.CharField(widget=forms.Textarea)
-    noidung1=forms.CharField(widget=forms.Textarea)
-    noidung1=forms.CharField(widget=forms.Textarea)
-    noidung1=forms.CharField(widget=forms.Textarea)
-    title=forms.CharField(max_length=200)
-    def savecode_hasImg(self,nick):
-        codea=script()
-        codea.Code1=self.cleaned_data['code1']
-        codea.Code2=self.cleaned_data['code2']
-        codea.Code3=self.cleaned_data['code3']
-        codea.Noidung1=self.cleaned_data['noidung1']
-        codea.Noidung2=self.cleaned_data['noidung2']
-        codea.Noidung3=self.cleaned_data['noidung3']
-        codea.Tieude=self.cleaned_data['title']
-        codea.User=nick
-        codea.save()
+class CommentForm_share(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        self.author = kwargs.pop('author', None)
+        self.post = kwargs.pop('post', None)
+        super().__init__(*args, **kwargs)
+
+    def save(self,id_user, commit=True):
+        comment = super().save(commit=False)
+        comment.author = self.author
+        comment.post = self.post
+        comment.id_user=id_user
+        comment.save()
+
+    class Meta:
+        model = Comment_share
+        fields = ["body"]
 
         

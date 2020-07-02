@@ -16,20 +16,20 @@ Bài Viết
     </tr>
   </thead>
   <tbody>
-{% for post in Code %}
+{% for post1 in Code %}
     <tr>
       <td>
-        <b>[{{post.Loai}}]</b>
-        <a href="/post/{{post.id}}">
+        <b>[{{post1.Loai}}]</b>
+        <a href="/post/{{post1.id}}">
           <p class="text-break">
             <span class="d-inline-block text-truncate" style="max-width: 100px;">
-                {{post.Title}}
+                {{post1.Title}}
             </span>
           </p>
         </a>
       </td>
-      <td>{{post.User}}</td>
-      <td>{{post.HuongUng}} % </td>
+      <td>{{post1.User}}</td>
+      <td>{{post1.HuongUng}} % </td>
    </tr>
  {% endfor %}  
   </tbody>
